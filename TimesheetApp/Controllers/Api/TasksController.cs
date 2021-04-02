@@ -39,6 +39,16 @@ namespace TimesheetApp.Controllers.Api
 
             return newTask;
         }
+        
+        [HttpGet]
+        public IEnumerable<Task> GetTasksForDate(string date)
+        {
+            DateTime Date = Convert.ToDateTime(date);
+            if (Date != null)
+                return _repository.GetTasks(Date).ToList();
+            else
+                return _repository.GetAll();
+        }
 
         [HttpDelete]
         public void DeleteTask(int id)
