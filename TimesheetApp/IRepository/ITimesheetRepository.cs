@@ -12,5 +12,6 @@ namespace TimesheetApp.IRepository
         IEnumerable<Task> GetAll();
         void RemoveTask(Task task);
         void Add(Task task);
+        IEnumerable<Task> GetTasks(DateTime date);
     }
 }
