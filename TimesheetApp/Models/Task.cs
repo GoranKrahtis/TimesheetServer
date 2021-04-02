@@ -17,5 +17,6 @@ namespace TimesheetApp.Models
         public int id { get; set; }
         public string title { get; set; }
         public int hours { get; set; }
+        public Nullable<System.DateTime> date { get; set; }
     }
 }
