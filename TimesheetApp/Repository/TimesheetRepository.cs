@@ -32,7 +32,7 @@ namespace TimesheetApp.Repository
 
         public IEnumerable<Task> GetAll()
         {
-            List<Task> tempList = _tasks.ToList();
+            List<Task> tempList = _tasks.Where(t=>t.date == DateTime.Today).ToList();
             if (tempList != null)
                 return tempList;
             return new List<Task>();
