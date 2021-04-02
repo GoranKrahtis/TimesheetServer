@@ -21,8 +21,15 @@ namespace TimesheetApp.Repository
 
         public void Add(Task task)
         {
-            _tasks.Add(task);
-            _context.SaveChanges();
+            List<Task> tasks = _tasks.Where(t => t.date != null && t.date == task.date).ToList();
+            int? suma = tasks.Sum(t=>t.hours);
+            if (suma != null && suma + task.hours <= 24)
+            {
+                _tasks.Add(task);
+                _context.SaveChanges();
+            }
+            else
+                return;
         }
 
         public Task Get(int id)
@@ -36,6 +43,14 @@ namespace TimesheetApp.Repository
             if (tempList != null)
                 return tempList;
             return new List<Task>();
+        }
+        
+        public IEnumerable<Task> GetTasks(DateTime date)
+        {
+            if (date != null)
+                return _tasks.Where(t => t.date == date).ToList();
+            else
+                return new List<Task>();
         }
 
         public void RemoveTask(Task task)
